@@ -1,6 +1,19 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { useEffect, useState } from "react";
+import Router from "./Router";
+//import { UserContextProvider } from "./context/user";
+
+const App = () => (
+  
+    <Router />
+  
+);
+
+export default App;
+
+/*
+//import logo from "./logo.svg";
+//import "./App.css";
+//import { useEffect, useState } from "react";
+
 
 function App() {
   // Estados
@@ -70,3 +83,5 @@ function App() {
 }
 
 export default App;
+*/
+
