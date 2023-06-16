@@ -7,63 +7,60 @@ import { Home, Users, File, FileText, PlusCircle } from "react-feather";
 
 const Sidebar = () => {
   return (
-    <nav
-      id="sidebarMenu"
-      className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
-    >
-      <div className="position-sticky pt-3">
-        <Nav className="flex-column">
-          <NavItem>
-            <NavLink to="dashboard" className="nav-link">
-              <Home className="feather" />
-              Dashboard
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <Nav className="flex-column mb-2">
-          <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Blog</span>
-            <Link
-              to="blog/add"
-              className="link-secondary"
-              aria-label="Adicionar novo Post"
-            >
-              <PlusCircle className="feather" />
+    <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <div
+        className="offcanvas-lg offcanvas-end bg-body-tertiary"
+        id="sidebarMenu"
+        aria-labelledby="sidebarMenuLabel"
+      >
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="sidebarMenuLabel">
+            Company name
+          </h5>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            data-bs-target="#sidebarMenu"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+          <ul className="nav flex-column">
+            <li className="nav-item">
+              <Link className="nav-link d-flex align-items-center gap-2 active">
+                Dashboard
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link d-flex align-items-center gap-2">
+                Orders
+              </Link>
+            </li>
+          </ul>
+
+          <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+            <span>Saved reports</span>
+            <Link className="nav-link d-flex align-items-center gap-2">
+              Orders
             </Link>
           </h6>
-          <NavItem>
-            <NavLink to="blog" className="nav-link" end>
-              <File className="feather" />
-              Posts
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="blog/categories" className="nav-link">
-              <FileText className="feather" />
-              Categorias
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <Nav className="flex-column mb-2">
-          <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Administração</span>
-            <Link
-              to="users/add"
-              className="link-secondary"
-              aria-label="Adicionar novo utilizador"
-            >
-              <PlusCircle className="feather" />
-            </Link>
-          </h6>
-          <NavItem>
-            <NavLink to="users" className="nav-link">
-              <Users className="feather" />
-              Utilizadores
-            </NavLink>
-          </NavItem>
-        </Nav>
+          <ul className="nav flex-column mb-auto">
+            <li className="nav-item"></li>
+            <li className="nav-item"></li>
+            <li className="nav-item"></li>
+            <li className="nav-item"></li>
+          </ul>
+
+          <hr className="my-3" />
+
+          <ul className="nav flex-column mb-auto">
+            <li className="nav-item"></li>
+            <li className="nav-item"></li>
+          </ul>
+        </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

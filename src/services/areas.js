@@ -20,4 +20,4 @@ const deleteArea = (id) => {
   return axios.delete(`/areas/${id}`);
 };
 
-export { getPosts, getPost, createPost, updatePost, deletePost };
+export { getAreas, getArea, createArea, updateArea, deleteArea };

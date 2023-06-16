@@ -16,10 +16,10 @@ const Home = () => {
           <p className="lead">
             Esta plataforma permite a gestão e reservas de areas / salas
           </p>
-          <p className="lead">
-            
-          </p>
+          <p className="lead"></p>
         </main>
+
+        <Link className="btn btn-primary" to="dashboard">Login</Link>
 
         <footer className="mt-auto text-white-50">
           <p>Fabio Mota</p>
