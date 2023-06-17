@@ -1,72 +1,26 @@
-// ** React Imports
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-// ** Reactstrap Imports
-import { Button } from "reactstrap";
-
-//import { authLogOut } from "../../services/auth";
-//import UserContext from "../../context/user";
-
-const Header = () => {
-  //const { getUser } = useContext(UserContext);
-  const navigate = useNavigate();
-  /*
-  async function logOut() {
-    await authLogOut();
-    await getUser();
-    navigate("/", { replace: true });
-  }
-  */
-
+const Header = ({ onLogout }) => {
   return (
-    <header
-      className="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow"
-      data-bs-theme="dark"
-    >
-      <a
-        className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
-        href="#"
-      >
-        Company name
+    <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+        GesClock
       </a>
-
-      <ul className="navbar-nav flex-row d-md-none">
-        <li className="nav-item text-nowrap">
-          <button
-            className="nav-link px-3 text-white"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSearch"
-            aria-controls="navbarSearch"
-            aria-expanded="false"
-            aria-label="Toggle search"
-          >
-            <svg className="bi"></svg>
+      <button
+        className="navbar-toggler position-absolute d-md-none collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="navbar-nav">
+        <div className="nav-item text-nowrap">
+          <button type="button" onClick={onLogout}>
+            Logout
           </button>
-        </li>
-        <li className="nav-item text-nowrap">
-          <button
-            className="nav-link px-3 text-white"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#sidebarMenu"
-            aria-controls="sidebarMenu"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <svg className="bi"></svg>
-          </button>
-        </li>
-      </ul>
-
-      <div id="navbarSearch" className="navbar-search w-100 collapse">
-        <input
-          className="form-control w-100 rounded-0 border-0"
-          type="text"
-          placeholder="Search"
-          aria-label="Search"
-        />
+        </div>
       </div>
     </header>
   );

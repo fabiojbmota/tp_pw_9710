@@ -1,21 +1,25 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// Layouts
-import MainLayout from "./layouts/main";
+// Global Components Imports
+import Home from "./views/globals/home";
+import Login from "./views/globals/login";
+import NotFound from "./views/globals/notFound";
 
-// Views - Global
-import Home from "./views/global/home";
-import Dashboard from "./views/global/dashboard";
+// Main Layout Imports
+import MainLayout from "./layouts/mainLayout";
+import Dashboard from "./views/globals/dashboard";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
         <Route element={<MainLayout />}>
           <Route index path="dashboard" element={<Dashboard />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

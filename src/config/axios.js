@@ -1,9 +1,12 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "pds.braintechcloud.com",
+  baseURL: "https://pds.braintechcloud.com",
   headers: {
     "Content-type": "application/json",
   },
-  withCredentials: true,
+  auth: {
+    username: "1blQ0D2KM2lPNAPB",
+    password: "GKXzI650qhKSUNkQxzzxvrvXbXtDwKY9",
+  },
 });
