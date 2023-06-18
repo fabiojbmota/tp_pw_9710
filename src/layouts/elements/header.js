@@ -1,9 +1,22 @@
-const Header = ({ onLogout }) => {
+// React Imports
+import { NavLink, useNavigate } from "react-router-dom";
+
+// Context Imports
+import useAuthContext from "../../context/auth";
+
+const Header = () => {
+  // Hooks
+  const { onLogout } = useAuthContext();
+  const navigate = useNavigate();
+
   return (
     <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+      <NavLink
+        className="navbar-brand col-md-3 col-lg-2 me-0 px-3"
+        to={"../dashboard"}
+      >
         GesClock
-      </a>
+      </NavLink>
       <button
         className="navbar-toggler position-absolute d-md-none collapsed"
         type="button"
@@ -17,7 +30,14 @@ const Header = ({ onLogout }) => {
       </button>
       <div className="navbar-nav">
         <div className="nav-item text-nowrap">
-          <button type="button" onClick={onLogout}>
+          <button
+            className="nav-link px-3"
+            type="button"
+            onClick={() => {
+              onLogout();
+              navigate("..");
+            }}
+          >
             Logout
           </button>
         </div>

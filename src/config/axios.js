@@ -5,8 +5,5 @@ export default axios.create({
   headers: {
     "Content-type": "application/json",
   },
-  auth: {
-    username: "1blQ0D2KM2lPNAPB",
-    password: "GKXzI650qhKSUNkQxzzxvrvXbXtDwKY9",
-  },
+  withCredentials: true,
 });

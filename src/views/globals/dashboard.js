@@ -5,9 +5,12 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
 
 // Services Imports
-import { getUser } from "../../services/user";
+import useAuthContext from "../../context/auth";
 
 const Dashboard = () => {
+  // Hooks
+  const { user } = useAuthContext();
+
   // Declare States
   const [areas, setAreas] = useState([]);
   const [clocks, setClocks] = useState([]);
@@ -15,23 +18,16 @@ const Dashboard = () => {
 
   //
   useEffect(() => {
-    fetchUser();
+    setAreas(user.areas);
+    setClocks(user.lastclocks);
+    setBookings(user.nextbookings);
 
     return () => {
       setAreas([]);
       setClocks([]);
       setBookings([]);
     };
-  }, []);
-
-  // Fetch user
-  const fetchUser = async () => {
-    const { data } = await getUser(1);
-
-    setAreas(data.areas);
-    setClocks(data.lastclocks);
-    setBookings(data.nextbookings);
-  };
+  }, [user]);
 
   // Render next bookings
   const renderBookings = () =>
@@ -62,7 +58,7 @@ const Dashboard = () => {
     ));
 
   return (
-    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Dashboard</h1>
       </div>
@@ -115,7 +111,7 @@ const Dashboard = () => {
           </div>
         </Col>
       </Row>
-    </main>
+    </>
   );
 };
 
