@@ -10,14 +10,8 @@ import NotFound from "./views/globals/notFound";
 // Main Layout Imports
 import MainLayout from "./layouts/mainLayout";
 import Dashboard from "./views/globals/dashboard";
-
-const Teste = ({ title }) => {
-  return (
-    <div>
-      <h1>{title}</h1>
-    </div>
-  );
-};
+import Bookings from "./views/bookings";
+import ListBookings from "./views/bookings/list";
 
 const Router = () => {
   return (
@@ -27,7 +21,10 @@ const Router = () => {
         <Route path="login" element={<Login />} />
         <Route element={<MainLayout />}>
           <Route index path="dashboard" element={<Dashboard />} />
-          <Route path="bookings" element={<Teste title="Bookings" />} />
+          <Route path="bookings" element={<Bookings />}>
+            <Route index element={<ListBookings />} />
+            <Route path="add" element={<ListBookings />} />
+          </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
