@@ -1,6 +1,12 @@
+// React Imports
 import { useState } from "react";
-import useAuthContext from "../../context/auth";
 import { useLocation, useNavigate } from "react-router-dom";
+
+// Context Import
+import useAuthContext from "../../context/auth";
+
+// Assets Imports
+import logo from "./../../assets/img/logo.png";
 
 const Login = () => {
   // Hooks
@@ -19,8 +25,8 @@ const Login = () => {
 
     try {
       const data = {
-        username: "rdantas",
-        password: "password",
+        username: formEmail,
+        password: formPassword,
       };
 
       await onLogin(data);
@@ -32,12 +38,39 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form onSubmit={login}>
-        {formError}
-        <button type="submit">Sign In</button>
-      </form>
+    <div class="text-center h-100 ">
+      <main class="form-signin h-100">
+        <form class="h-100" onSubmit={login}>
+          <img class="logo" img src={logo} alt="Logo" />
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+              onChange={(e) => setFormEmail(e.target.value)}
+            />
+            <label htmlFor="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              onChange={(e) => setFormPassword(e.target.value)}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
+
+          <div class="checkbox mb-3">{formError}</div>
+          <button class="w-40 btn btn-lg btn-primary" type="submit">
+            Sign in
+          </button>
+        </form>
+      </main>
     </div>
   );
 };

@@ -11,6 +11,14 @@ import NotFound from "./views/globals/notFound";
 import MainLayout from "./layouts/mainLayout";
 import Dashboard from "./views/globals/dashboard";
 
+const Teste = ({ title }) => {
+  return (
+    <div>
+      <h1>{title}</h1>
+    </div>
+  );
+};
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -18,7 +26,8 @@ const Router = () => {
         <Route exact path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route element={<MainLayout />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route index path="dashboard" element={<Dashboard />} />
+          <Route path="bookings" element={<Teste title="Bookings" />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
