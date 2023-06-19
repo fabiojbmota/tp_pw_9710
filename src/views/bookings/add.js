@@ -1,6 +1,6 @@
 // ** React Imports
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // Third-Party Imports
 import Select from "react-select";
@@ -24,7 +24,10 @@ import {
 
 const AddBooking = () => {
   const navigate = useNavigate();
-  // ** Post States
+  let { bookingId } = useParams();
+
+  console.log(bookingId);
+
   const [rooms, setRooms] = useState([]);
   const [room, setRoom] = useState([]);
   const [start, setStart] = useState(new Date());
@@ -32,58 +35,55 @@ const AddBooking = () => {
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    getBookingRooms();
-  }, []);
+    fetchRooms();
+    if (bookingId !== undefined) fetchBooking(bookingId);
+  }, [bookingId]);
 
-  const getBookingRooms = async () => {
-    try {
-      const rooms = await getRooms();
-      const { data } = rooms;
-      const options = data.map((i) => {
-        return { value: i.id, label: i.name };
-      });
-      setRooms(options);
-      setRoom(options[0]);
-    } catch (err) {
-      console.log(err);
-    }
+  const fetchBooking = async () => {
+    const { data } = await bookings.getBookings();
+
+    setRoom(data.room);
+    //const startISO = new Date(start[0]).toISOString();
+    const startISO = new Date(data.start);
+    const finalISO = new Date(data.final);
+    setStart(startISO);
+    setFinal(finalISO);
+    setDescription(data.description);
+  };
+
+  const fetchRooms = async () => {
+    const rooms = await getRooms();
+    const { data } = rooms;
+    const options = data.map((i) => {
+      return { value: i.id, label: i.name };
+    });
+    setRooms(options);
+    setRoom(options[0]);
   };
 
   const saveBooking = async (e) => {
     e.preventDefault();
 
+    const startISO = new Date(start[0]).toISOString();
+    const finalISO = new Date(final[0]).toISOString();
+
+    console.log(startISO);
+
     const bookingData = {
       room: room.value,
-      start: start.toISOString(),
-      final: final.toISOString(),
+      start: startISO,
+      final: finalISO,
       description: description,
     };
 
     try {
-      await bookings.createBooking(bookingData);
-      navigate("../bookings");
-    } catch (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log("response");
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-        // http.ClientRequest in node.js
-        console.log("request");
-        console.log(error.request);
+      if (bookingId !== undefined) {
+        await bookings.updateBooking(bookingId, bookingData);
       } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log("message");
-        console.log("Error", error.message);
+        await bookings.createBooking(bookingData);
+        navigate("../bookings");
       }
-      console.log("config");
-      console.log(error.config);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -99,11 +99,12 @@ const AddBooking = () => {
                     <Label className="form-label" for="booking-room">
                       Sala
                     </Label>
-                    <Input
+                    <Select
                       id="booking-room"
                       value={room}
-                      onChange={(e) => setRoom(e.target.value)}
-                    ></Input>
+                      onChange={setRoom}
+                      options={rooms}
+                    />
                   </Col>
                   <Col md="4" className="mb-2">
                     <Label className="form-label" for="booking-start">
@@ -143,7 +144,7 @@ const AddBooking = () => {
                     <Button color="primary" className="me-1" type="submit">
                       Save Changes
                     </Button>
-                    <Link className="btn btn-outline-secondary" to={"/booking"}>
+                    <Link className="btn btn-outline-secondary" to={"/bookings"}>
                       Cancel
                     </Link>
                   </Col>

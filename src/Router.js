@@ -23,11 +23,12 @@ const Router = () => {
         <Route path="login" element={<Login />} />
         <Route element={<MainLayout />}>
           <Route index path="dashboard" element={<Dashboard />} />
-          <Route path="bookings" element={<Bookings title="Reservas"/>}>
+          <Route path="bookings" element={<Bookings title="Reservas" />}>
             <Route index element={<ListBookings />} />
             <Route path="add" element={<AddBooking />} />
+            <Route path=":bookingId" element={<AddBooking />} />
           </Route>
-          <Route path="rooms" element={<Bookings title="Salas"/>}>
+          <Route path="rooms" element={<Bookings tintle="Salas" />}>
             <Route index element={<ListRooms />} />
           </Route>
         </Route>
