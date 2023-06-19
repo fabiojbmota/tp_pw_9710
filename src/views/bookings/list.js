@@ -41,7 +41,7 @@ const ListBookings = () => {
 
   return (
     <>
-      <Link>Adicionar</Link>
+      <Link to="/add.js">Adicionar</Link>
       <Table>
         <thead>
           <tr>
