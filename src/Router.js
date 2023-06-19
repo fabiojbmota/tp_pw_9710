@@ -12,6 +12,7 @@ import MainLayout from "./layouts/mainLayout";
 import Dashboard from "./views/globals/dashboard";
 import Bookings from "./views/bookings";
 import ListBookings from "./views/bookings/list";
+import AddBooking from "./views/bookings/add";
 
 const Router = () => {
   return (
@@ -21,9 +22,12 @@ const Router = () => {
         <Route path="login" element={<Login />} />
         <Route element={<MainLayout />}>
           <Route index path="dashboard" element={<Dashboard />} />
-          <Route path="bookings" element={<Bookings />}>
+          <Route path="bookings" element={<Bookings title="Reservas"/>}>
             <Route index element={<ListBookings />} />
-            <Route path="add" element={<ListBookings />} />
+            <Route path="add" element={<AddBooking />} />
+          </Route>
+          <Route path="rooms" element={<Bookings title="Salas"/>}>
+            <Route index element={<ListBookings />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

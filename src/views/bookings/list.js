@@ -20,6 +20,11 @@ const ListBookings = () => {
     setBookings(data);
   };
 
+  const deleteBooking = async (id, validated) => {
+    if (!validated) await deleteBooking(id);
+    getData();
+  };
+
   const renderBooking = () =>
     bookings.map((booking, i) => {
       return (
@@ -33,7 +38,9 @@ const ListBookings = () => {
           <td>{booking.validated ? "false" : "true"}</td>
           <td>
             <Link to="/">Editar</Link>
-            <Link to="/">Apagar</Link>
+            <button onClick={deleteBooking(booking.id, booking.validated)}>
+              Apagar
+            </button>
           </td>
         </tr>
       );
@@ -41,7 +48,7 @@ const ListBookings = () => {
 
   return (
     <>
-      <Link to="/add.js">Adicionar</Link>
+      <Link to="add">Adicionar</Link>
       <Table>
         <thead>
           <tr>
