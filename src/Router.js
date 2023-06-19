@@ -13,6 +13,7 @@ import Dashboard from "./views/globals/dashboard";
 import Bookings from "./views/bookings";
 import ListBookings from "./views/bookings/list";
 import AddBooking from "./views/bookings/add";
+import ListRooms from "./views/rooms/list";
 
 const Router = () => {
   return (
@@ -27,7 +28,7 @@ const Router = () => {
             <Route path="add" element={<AddBooking />} />
           </Route>
           <Route path="rooms" element={<Bookings title="Salas"/>}>
-            <Route index element={<ListBookings />} />
+            <Route index element={<ListRooms />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

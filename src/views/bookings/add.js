@@ -7,7 +7,7 @@ import Select from "react-select";
 import Flatpickr from "react-flatpickr";
 
 // ** Configs
-import { getBookingRooms } from "../../services/bookingRooms";
+import { getRooms } from "../../services/rooms";
 import * as bookings from "../../services/bookings";
 
 // ** Reactstrap Imports
@@ -25,24 +25,24 @@ import {
 const AddBooking = () => {
   const navigate = useNavigate();
   // ** Post States
-  const [bookingRooms, setBookingRooms] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [room, setRoom] = useState([]);
   const [start, setStart] = useState(new Date());
   const [final, setFinal] = useState(new Date());
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    getRooms();
+    getBookingRooms();
   }, []);
 
-  const getRooms = async () => {
+  const getBookingRooms = async () => {
     try {
-      const bookingRooms = await getRooms();
-      const { data } = bookingRooms;
+      const rooms = await getRooms();
+      const { data } = rooms;
       const options = data.map((i) => {
         return { value: i.id, label: i.name };
       });
-      setBookingRooms(options);
+      setRooms(options);
       setRoom(options[0]);
     } catch (err) {
       console.log(err);
@@ -70,7 +70,7 @@ const AddBooking = () => {
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
-      } else if (error.request) {S
+      } else if (error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
         // http.ClientRequest in node.js
@@ -96,82 +96,48 @@ const AddBooking = () => {
               <Form className="mt-2" onSubmit={saveBooking}>
                 <Row>
                   <Col md="10" className="mb-2">
-                    <Label className="form-label" for="booking-title">
-                      Title
+                    <Label className="form-label" for="booking-room">
+                      Sala
                     </Label>
                     <Input
-                      id="booking-title"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                    ></Input>
-                  </Col>
-                  <Col md="2" className="mb-2">
-                    <Label for="post-featured" className="form-check-label">
-                      Featured
-                    </Label>
-                    <div className="form-switch">
-                      <Input
-                        type="switch"
-                        id="booking-featured"
-                        value={featured}
-                        onChange={(e) => setFeatured(e.target.checked)}
-                      />
-                    </div>
-                  </Col>
-                  <Col md="4" className="mb-2">
-                    <Label className="form-label" for="booking-date">
-                      Date
-                    </Label>
-                    <Flatpickr
-                      id="booking-date"
-                      className="form-control"
-                      data-enable-time
-                      value={date}
-                      onChange={(date) => setDate(date)}
-                    />
-                  </Col>
-                  <Col md="4" className="mb-2">
-                    <Label className="form-label" for="booking-room">
-                      Room
-                    </Label>
-                    <Select
                       id="booking-room"
                       value={room}
-                      onChange={setRoom}
-                      options={bookingRooms}
+                      onChange={(e) => setRoom(e.target.value)}
+                    ></Input>
+                  </Col>
+                  <Col md="4" className="mb-2">
+                    <Label className="form-label" for="booking-start">
+                      Inicio
+                    </Label>
+                    <Flatpickr
+                      id="booking-start"
+                      className="form-control"
+                      data-enable-time
+                      value={start}
+                      onChange={(start) => setStart(start)}
                     />
                   </Col>
                   <Col md="4" className="mb-2">
-                    <Label className="form-label" for="booking-status">
-                      Status
+                    <Label className="form-label" for="booking-final">
+                      Fim
                     </Label>
-                    <Select
-                      id="booking-status"
-                      value={status}
-                      onChange={setStatus}
-                      options={statusOpts}
+                    <Flatpickr
+                      id="booking-final"
+                      className="form-control"
+                      data-enable-time
+                      value={final}
+                      onChange={(final) => setFinal(final)}
                     />
                   </Col>
-                  <Col sm="12" className="mb-2">
-                    <Label className="form-label" for="booking-excerpt">
-                      Excerpt
+                  <Col md="10" className="mb-2">
+                    <Label className="form-label" for="booking-description">
+                      Descrição
                     </Label>
                     <Input
-                      type="textarea"
-                      id="booking-excerpt"
-                      rows="3"
-                      value={excerpt}
-                      onChange={(e) => setExcerpt(e.target.value)}
-                    />
-                  </Col>
-                  <Col sm="12" className="mb-2">
-                    <Label className="form-label" for="booking-content">
-                      Content
-                    </Label>
-                    <Editor
-                      editorState={content}
-                      onEditorStateChange={(data) => setContent(data)}
-                    />
+                      id="booking-description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    ></Input>
                   </Col>
                   <Col className="mt-50">
                     <Button color="primary" className="me-1" type="submit">

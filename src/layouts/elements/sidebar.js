@@ -1,10 +1,10 @@
-import { ReactComponent as Add } from "../../assets/svg/add.svg";
+//import { ReactComponent as Add } from "../../assets/svg/add.svg";
 // ** React Imports
 import { Link, NavLink } from "react-router-dom";
 
 // ** Reactstrap Imports
 import { Nav, NavItem } from "reactstrap";
-import { Home, File, FileText, PlusCircle } from "react-feather";
+import { Home,  } from "react-feather";
 
 const Sidebar = () => {
   return (
@@ -21,30 +21,22 @@ const Sidebar = () => {
             </NavLink>
           </NavItem>
         </Nav>
-        <Nav className="flex-column mb-2">
-          <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Bookings</span>
-            <Link
-              to="bookings"
-              className="link-secondary"
-              aria-label="Adicionar novo Post"
-            >
-              <PlusCircle className="feather" />
-            </Link>
-          </h6>
+        <Nav className="flex-column">
           <NavItem>
-            <NavLink to="blog" className="nav-link" end>
-              <File className="feather" />
-              Areas
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="blog/categories" className="nav-link">
-              <FileText className="feather" />
-              Categorias
+            <NavLink to="bookings" className="nav-link">
+              <Home className="feather" />
+              Reservas
             </NavLink>
           </NavItem>
         </Nav>
+        <Nav className="flex-column">
+          <NavItem>
+            <NavLink to="rooms" className="nav-link">
+              <Home className="feather" />
+              Salas
+            </NavLink>
+          </NavItem>
+        </Nav>       
       </div>
     </nav>
   );

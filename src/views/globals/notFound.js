@@ -12,7 +12,7 @@ const NotFound = () => {
           <br></br>
           <p class="lead">
             <Link
-              to="/home"
+              to="/dashboard"
               class="btn btn-lg btn-secondary fw-bold border-white bg-white"
             >
               <font color="black"> Go Home </font>

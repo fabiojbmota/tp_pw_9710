@@ -37,15 +37,15 @@ const ListBookings = () => {
           <td>{booking.description}</td>
           <td>{booking.validated ? "false" : "true"}</td>
           <td>
-            <Link to="/">Editar</Link>
-            <button onClick={deleteBooking(booking.id, booking.validated)}>
+            <Link to="add">Editar</Link>
+            <button >
               Apagar
             </button>
           </td>
         </tr>
       );
     });
-
+//onClick={deleteBooking(booking.id, booking.validated)}
   return (
     <>
       <Link to="add">Adicionar</Link>
@@ -53,12 +53,12 @@ const ListBookings = () => {
         <thead>
           <tr>
             <td>Id</td>
-            <td>UserName</td>
-            <td>RoomName</td>
-            <td>Start</td>
-            <td>Final</td>
-            <td>Description</td>
-            <td>Validated</td>
+            <td>Utilizador</td>
+            <td>Nome</td>
+            <td>Inicio</td>
+            <td>Fim</td>
+            <td>Descrição</td>
+            <td>Validação</td>
             <td>Ações</td>
           </tr>
         </thead>

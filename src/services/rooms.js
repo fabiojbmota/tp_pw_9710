@@ -1,23 +1,23 @@
 import axios from "../config/axios";
 
-const getBookings = () => {
-  return axios.get("/bookings");
+const getRooms = () => {
+  return axios.get("/rooms");
 };
 
-const getBooking = (id) => {
-  return axios.get(`/bookings/${id}`);
+const getRoom = (id) => {
+  return axios.get(`/rooms/${id}`);
 };
 
-const createBooking = (data) => {
-  return axios.post("/bookings", data);
+const createRoom = (data) => {
+  return axios.post("/rooms", data);
 };
 
-const updateBooking = (id, data) => {
-  return axios.put(`/bookings/${id}`, data);
+const updateRoom = (id, data) => {
+  return axios.put(`/rooms/${id}`, data);
 };
 
-const deleteBooking = (id) => {
-  return axios.delete(`/bookings/${id}`);
+const deleteRoom = (id) => {
+  return axios.delete(`/rooms/${id}`);
 };
 
-export { getBookings, getBooking, createBooking, updateBooking, deleteBooking };
+export { getRooms, getRoom, createRoom, updateRoom, deleteRoom };
