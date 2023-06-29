@@ -1,32 +1,27 @@
-// React Imports
+// ** React Imports
 import React, { useEffect, useState } from "react";
 
-// Third-party Imports
-import { Col, Row } from "reactstrap";
+// ** Third-party Imports
+import { Col, Row, Table } from "reactstrap";
+import { LogIn, LogOut } from "react-feather";
 
-// Services Imports
+// ** Context Imports
 import useAuthContext from "../../context/auth";
 
 const Dashboard = () => {
   // Hooks
   const { user } = useAuthContext();
 
-  // Declare States
+  // States
   const [areas, setAreas] = useState([]);
   const [clocks, setClocks] = useState([]);
   const [bookings, setBookings] = useState([]);
 
-  //
+  // useEffect Hook
   useEffect(() => {
     setAreas(user.areas);
     setClocks(user.lastclocks);
     setBookings(user.nextbookings);
-
-    return () => {
-      setAreas([]);
-      setClocks([]);
-      setBookings([]);
-    };
   }, [user]);
 
   // Render next bookings
@@ -39,7 +34,7 @@ const Dashboard = () => {
       </tr>
     ));
 
-  // Render Areas
+  // Render areas
   const renderAreas = () =>
     areas.map((area, i) => (
       <tr key={i}>
@@ -48,12 +43,18 @@ const Dashboard = () => {
       </tr>
     ));
 
-  // Render Clocks
+  // Render clocks
   const renderClocks = () =>
     clocks.map((clock, i) => (
       <tr key={i}>
         <td>{clock.datetime}</td>
-        <td>{clock.direction}</td>
+        <td>
+          {clock.direction === "in" ? (
+            <LogIn size={14} />
+          ) : (
+            <LogOut size={14} />
+          )}
+        </td>
       </tr>
     ));
 
@@ -64,51 +65,51 @@ const Dashboard = () => {
       </div>
 
       <h4>Próximas Reservas</h4>
-      <div className="table-responsive">
-        <table className="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Data de Inicio</th>
-              <th scope="col">Descrição</th>
-            </tr>
-          </thead>
-          <tbody>{renderBookings()}</tbody>
-        </table>
-        {bookings.length === 0 && (
-          <p>Não existem próximas reservas marcadas.</p>
-        )}
-      </div>
+      <Table responsive striped size="sm">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Data de Inicio</th>
+            <th scope="col">Descrição</th>
+          </tr>
+        </thead>
+        <tbody>{renderBookings()}</tbody>
+      </Table>
+      {bookings.length === 0 && (
+        <p style={{ marginTop: "-1rem" }}>
+          Não existem próximas reservas marcadas.
+        </p>
+      )}
       <Row className="mt-5">
         <Col md="6">
           <h4>Áreas Autorizadas</h4>
-          <div className="table-responsive">
-            <table className="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Nome</th>
-                </tr>
-              </thead>
-              <tbody>{renderAreas()}</tbody>
-            </table>
-            {areas.length === 0 && <p>Não existem áreas autorizadas.</p>}
-          </div>
+          <Table responsive striped size="sm">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+              </tr>
+            </thead>
+            <tbody>{renderAreas()}</tbody>
+          </Table>
+          {areas.length === 0 && (
+            <p style={{ marginTop: "-1rem" }}>Não existem áreas autorizadas.</p>
+          )}
         </Col>
         <Col md="6">
           <h4>Últimos Pontos</h4>
-          <div className="table-responsive">
-            <table className="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">Data</th>
-                  <th scope="col">Direção</th>
-                </tr>
-              </thead>
-              <tbody>{renderClocks()}</tbody>
-            </table>
-            {clocks.length === 0 && <p>Não existem pontos.</p>}
-          </div>
+          <Table responsive striped size="sm">
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Direção</th>
+              </tr>
+            </thead>
+            <tbody>{renderClocks()}</tbody>
+          </Table>
+          {clocks.length === 0 && (
+            <p style={{ marginTop: "-1rem" }}>Não existem pontos.</p>
+          )}
         </Col>
       </Row>
     </>

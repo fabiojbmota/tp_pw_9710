@@ -1,12 +1,15 @@
-// React Imports
+// ** React Imports
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// Context Import
+// ** Third-party Imports
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+
+// ** Context Import
 import useAuthContext from "../../context/auth";
 
-// Assets Imports
-import logo from "./../../assets/img/logo.png";
+// ** Assets Imports
+import logo from "../../assets/img/logo.png";
 
 const Login = () => {
   // Hooks
@@ -15,22 +18,26 @@ const Login = () => {
   const location = useLocation();
 
   // Sates
-  const [formEmail, setFormEmail] = useState("");
+  const [formUsername, setFormUsername] = useState("");
   const [formPassword, setFormPassword] = useState("");
   const [formError, setFormError] = useState(null);
 
-  // Login Function
+  // Login function
   const login = async (e) => {
     e.preventDefault();
 
     try {
+      // Body data
       const data = {
-        username: formEmail,
+        username: formUsername,
         password: formPassword,
       };
 
+      // Get login function from context
       await onLogin(data);
-      const origin = location.state?.from?.pathname || "../dashboard";
+
+      // Handle navigation
+      const origin = location.state?.from?.pathname || "/dashboard";
       navigate(origin);
     } catch (error) {
       setFormError(error.response.data.message);
@@ -38,38 +45,41 @@ const Login = () => {
   };
 
   return (
-    <div class="text-center h-100 ">
-      <main class="form-signin h-100">
-        <form class="h-100" onSubmit={login}>
-          <img class="logo" img src={logo} alt="Logo" />
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <div className="form-signin-container text-center">
+      <main className="form-signin">
+        <Form onSubmit={login}>
+          <img className="mb-4 img-fluid" src={logo} alt="logo" />
+          <h1 className="h3 mb-3 fw-normal">Faça Login</h1>
 
-          <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
-              onChange={(e) => setFormEmail(e.target.value)}
+          <FormGroup floating id="form-first">
+            <Input
+              id="formUsername"
+              placeholder="Username"
+              onChange={(e) => setFormUsername(e.target.value)}
             />
-            <label htmlFor="floatingInput">Email address</label>
-          </div>
-          <div class="form-floating">
-            <input
+            <Label for="formUsername">Username</Label>
+          </FormGroup>
+
+          <FormGroup floating>
+            <Input
               type="password"
-              class="form-control"
-              id="floatingPassword"
+              id="formPassword"
               placeholder="Password"
               onChange={(e) => setFormPassword(e.target.value)}
             />
-            <label htmlFor="floatingPassword">Password</label>
-          </div>
+            <Label for="formPassword">Password</Label>
+          </FormGroup>
 
-          <div class="checkbox mb-3">{formError}</div>
-          <button class="w-40 btn btn-lg btn-primary" type="submit">
-            Sign in
-          </button>
-        </form>
+          {formError && (
+            <p className="my-3">
+              <small>{formError}</small>
+            </p>
+          )}
+
+          <Button color="primary" size="lg" block type="submit">
+            Login
+          </Button>
+        </Form>
       </main>
     </div>
   );

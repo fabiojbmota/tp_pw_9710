@@ -1,7 +1,7 @@
 import axios from "../config/axios";
 
-const getBookings = () => {
-  return axios.get("/bookings");
+const getBookings = (orderby = "id", order = "desc") => {
+  return axios.get(`/bookings?orderby=${orderby}&order=${order}`);
 };
 
 const getBooking = (id) => {

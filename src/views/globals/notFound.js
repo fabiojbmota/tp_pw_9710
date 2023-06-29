@@ -1,28 +1,32 @@
-import { Link } from "react-router-dom";
+// ** React Imports
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const NotFound = () => {
+  // Hooks
+  const location = useLocation();
+
+  // Handle navigation
+  const origin = location.state?.from?.pathname || ".";
+  console.log(location);
+
   return (
-    <body class="d-flex h-100 text-center text-white bg-dark">
-      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <main class="px-3 mt-auto">
-          <h1 className="mb-5">OOPS</h1>
-
-          <p class="lead">Error 404 - THE PAGE CAN'T BE FOUND</p>
-
-          <br></br>
-          <p class="lead">
+    <div className="homepage d-flex h-100 text-center text-white bg-dark">
+      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <main className="my-auto px-3">
+          <h1 className="mb-5">OOPS!!!</h1>
+          <p className="lead">404 - A página não pode ser encontrada!</p>
+          <p className="lead">
             <Link
-              to="/dashboard"
-              class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+              to={origin}
+              className="btn btn-lg btn-secondary fw-bold border-white bg-white mt-5"
             >
-              <font color="black"> Go Home </font>
+              Voltar atrás!
             </Link>
           </p>
         </main>
-
-        <footer class="mt-auto text-white-50"></footer>
       </div>
-    </body>
+    </div>
   );
 };
 

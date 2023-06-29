@@ -1,10 +1,9 @@
-//import { ReactComponent as Add } from "../../assets/svg/add.svg";
 // ** React Imports
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-// ** Reactstrap Imports
+// ** Third-party Imports
 import { Nav, NavItem } from "reactstrap";
-import { Home,  } from "react-feather";
+import { Box, Calendar, Clock, File, Home, Users } from "react-feather";
 
 const Sidebar = () => {
   return (
@@ -15,28 +14,37 @@ const Sidebar = () => {
       <div className="position-sticky pt-3">
         <Nav className="flex-column">
           <NavItem>
-            <NavLink to="dashboard" className="nav-link">
+            <NavLink className="nav-link" to="/dashboard">
               <Home className="feather" />
               Dashboard
             </NavLink>
           </NavItem>
-        </Nav>
-        <Nav className="flex-column">
+          <h6 className="sidebar-heading px-3 mt-4 mb-1 text-muted">Gestão</h6>
           <NavItem>
-            <NavLink to="bookings" className="nav-link">
-              <Home className="feather" />
+            <NavLink className="nav-link" to="/bookings">
+              <Calendar className="feather" />
               Reservas
             </NavLink>
           </NavItem>
-        </Nav>
-        <Nav className="flex-column">
           <NavItem>
-            <NavLink to="rooms" className="nav-link">
-              <Home className="feather" />
+            <NavLink className="nav-link" to="/rooms">
+              <Box className="feather" />
               Salas
             </NavLink>
           </NavItem>
-        </Nav>       
+          <NavItem>
+            <NavLink className="nav-link" to="/areas">
+              <File className="feather" />
+              Áreas
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink className="nav-link" to="/clocks">
+              <Clock className="feather" />
+              Pontos
+            </NavLink>
+          </NavItem>
+        </Nav>
       </div>
     </nav>
   );

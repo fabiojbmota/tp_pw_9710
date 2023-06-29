@@ -1,19 +1,25 @@
-// React Imports
+// ** React Imports
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// Global Components Imports
+// ** Global Components Imports
 import Home from "./views/globals/home";
 import Login from "./views/globals/login";
 import NotFound from "./views/globals/notFound";
 
-// Main Layout Imports
+// ** Main Layout Imports
 import MainLayout from "./layouts/mainLayout";
 import Dashboard from "./views/globals/dashboard";
+import Admin from "./views/globals/admin";
+
+// ** Bookings Components Imports
 import Bookings from "./views/bookings";
-import ListBookings from "./views/bookings/list";
-import AddBooking from "./views/bookings/add";
-import ListRooms from "./views/rooms/list";
+import Booking from "./views/bookings/booking";
+
+// ** Rooms Components Imports
+import Rooms from "./views/rooms";
+import Areas from "./views/areas";
+import Users from "./views/users";
 
 const Router = () => {
   return (
@@ -23,13 +29,16 @@ const Router = () => {
         <Route path="login" element={<Login />} />
         <Route element={<MainLayout />}>
           <Route index path="dashboard" element={<Dashboard />} />
-          <Route path="bookings" element={<Bookings title="Reservas" />}>
-            <Route index element={<ListBookings />} />
-            <Route path="add" element={<AddBooking />} />
-            <Route path=":bookingId" element={<AddBooking />} />
+          <Route path="bookings" element={<Admin title="Reservas" />}>
+            <Route index element={<Bookings />} />
+            <Route path="add" element={<Booking />} />
+            <Route path=":bookingId" element={<Booking />} />
           </Route>
-          <Route path="rooms" element={<Bookings tintle="Salas" />}>
-            <Route index element={<ListRooms />} />
+          <Route path="rooms" element={<Admin title="Salas" />}>
+            <Route index element={<Rooms />} />
+          </Route>
+          <Route path="areas" element={<Admin title="Áreas" />}>
+            <Route index element={<Areas />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
