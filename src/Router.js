@@ -18,8 +18,9 @@ import Booking from "./views/bookings/booking";
 
 // ** Rooms Components Imports
 import Rooms from "./views/rooms";
+
+// ** Areas Components Imports
 import Areas from "./views/areas";
-import Users from "./views/users";
 
 const Router = () => {
   return (

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 // ** Third-party Imports
 import { Nav, NavItem } from "reactstrap";
-import { Box, Calendar, Clock, File, Home, Users } from "react-feather";
+import { Box, Calendar, Clock, File, Home } from "react-feather";
 
 const Sidebar = () => {
   return (
