@@ -1,40 +1,36 @@
 // ** React Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 // ** Third-party Imports
 import { Button, Table } from "reactstrap";
 import Select from "react-select";
-import {
-  ArrowDown,
-  ArrowUp,
-  Check,
-  Codepen,
-  Edit3,
-  Trash,
-  X,
-} from "react-feather";
+import { ArrowDown, ArrowUp, Check, Edit3, Trash, X } from "react-feather";
 
 // ** Services Imports
 import { deleteBooking, getBookings } from "../../services/bookings";
 import { getUsers } from "../../services/users";
 
 const Bookings = () => {
+  // Refs
+  const bookingsRef = useRef([]);
+
   // States
   const [bookings, setBookings] = useState([]);
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(null);
 
   // useEffect hook
   useEffect(() => {
     fetchBookings();
     fetchUsers();
-    console.log("passei");
   }, []);
 
   // Fetch bookings
   const fetchBookings = async () => {
     const { data } = await getBookings();
     setBookings(data);
+    bookingsRef.current = data;
   };
 
   // Fecth Users
@@ -57,12 +53,17 @@ const Bookings = () => {
   };
 
   // Filter Bookings
-  const filterBookings = (valueID) => {
-    let aux = [];
-    bookings.forEach((booking) => {
-      if (valueID === booking.user.id) aux.push(booking);
-    });
-    setBookings(aux);
+  const filterBookings = (option) => {
+    setUser(option);
+    if (option) {
+      let aux = [];
+      bookingsRef.current.forEach((booking) => {
+        if (option.value === booking.user.id) aux.push(booking);
+      });
+      setBookings(aux);
+    } else {
+      setBookings(bookingsRef.current);
+    }
   };
 
   // Render bookings
@@ -104,10 +105,18 @@ const Bookings = () => {
   return (
     <>
       <div className="d-flex justify-content-between align-items-center py-2 mb-3">
-        <Link className="btn btn-primary" to="add">
-          Adicionar Reserva
-        </Link>
-        <Select onChange={(e) => filterBookings(e.value)} options={users} />
+        <div className="d-inline-flex">
+          <Link className="btn btn-primary" to="add">
+            Adicionar Reserva
+          </Link>
+          <Select
+            isClearable
+            className="mx-2"
+            onChange={(e) => filterBookings(e)}
+            value={user}
+            options={users}
+          />
+        </div>
         <div>
           <Button color="pw" onClick={() => order("asc")}>
             <ArrowUp color="black" size={16} />
