@@ -22,6 +22,9 @@ import Rooms from "./views/rooms";
 // ** Areas Components Imports
 import Areas from "./views/areas";
 
+// ** Users Components Imports
+import Users from "./views/users";
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -40,6 +43,9 @@ const Router = () => {
           </Route>
           <Route path="areas" element={<Admin title="Áreas" />}>
             <Route index element={<Areas />} />
+          </Route>
+          <Route path="users" element={<Admin title="Utilizadores" />}>
+            <Route index element={<Users />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

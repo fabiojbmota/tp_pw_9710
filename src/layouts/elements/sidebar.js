@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 // ** Third-party Imports
 import { Nav, NavItem } from "reactstrap";
-import { Box, Calendar, Clock, File, Home } from "react-feather";
+import { Box, Calendar, Clock, File, Home, Users } from "react-feather";
 
 const Sidebar = () => {
   return (
@@ -42,6 +42,12 @@ const Sidebar = () => {
             <NavLink className="nav-link" to="/clocks">
               <Clock className="feather" />
               Pontos
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink className="nav-link" to="/users">
+              <Users className="feather" />
+              Utilizadores
             </NavLink>
           </NavItem>
         </Nav>
